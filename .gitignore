@@ -1,0 +1,10 @@
+.idea/
+
+bin/
+obj/
+Library/
+
+*.user
+*.suo
+*.tmp
+*.log
