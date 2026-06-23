@@ -10,7 +10,7 @@
 	<LongDescription>## Why this fix is needed
 Patch 1.6.0f1 lets offices import office goods from outside connections, but office goods imports can still get stuck.
 
-In practice, the game may find an outside connection to buy from, then another part of the game's trade logic rejects the purchase because that connection has no real stock recorded.
+In practice, the game may find an outside connection to buy from, then another part of the game's trade logic rejects the purchase because that connection has no real stock recorded, even when real stock is not actually needed.
 
 ## What this mod does
 Unleash Office Imports gives those stuck office import requests a small temporary nudge, so the game's next trade step can go through normally.</LongDescription>
