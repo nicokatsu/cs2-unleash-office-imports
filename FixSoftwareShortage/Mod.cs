@@ -1,5 +1,7 @@
-﻿using Colossal.Logging;
+using Colossal.Logging;
 using Game;
+using System;
+using System.Diagnostics;
 using Game.Modding;
 using Game.SceneFlow;
 using Game.Simulation;
@@ -14,18 +16,42 @@ namespace FixSoftwareShortage
 
         public void OnLoad(UpdateSystem updateSystem)
         {
-            log.Info($"{nameof(OnLoad)} version={Application.version}");
+            string gameVersion = Application.version;
+            LogEssential($"{nameof(OnLoad)} version={gameVersion} mode=vanilla_bridge");
 
             if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
-                log.Info($"Current mod asset at {asset.path}");
+            {
+                LogEssential($"Current mod asset at {asset.path}");
+            }
 
-            updateSystem.UpdateAfter<OfficeImportFallbackSystem, TradeSystem>(SystemUpdatePhase.GameSimulation);
+            updateSystem.UpdateBefore<OfficeImportBridgePrepareSystem, ResourceBuyerSystem>(SystemUpdatePhase.GameSimulation);
+            updateSystem.UpdateAfter<OfficeImportBridgeCleanupSystem, ResourceBuyerSystem>(SystemUpdatePhase.GameSimulation);
+            LogEssential("[OfficeImportBridge] registered; prepare=before ResourceBuyerSystem cleanup=after ResourceBuyerSystem");
+
+#if DEBUG
             updateSystem.UpdateAfter<OfficeExportDiagnosticSystem, TradeSystem>(SystemUpdatePhase.GameSimulation);
+#endif
         }
 
         public void OnDispose()
         {
-            log.Info(nameof(OnDispose));
+            LogEssential(nameof(OnDispose));
+        }
+
+        internal static void LogEssential(string message)
+        {
+            log.Info(message);
+        }
+
+        [Conditional("DEBUG")]
+        internal static void LogDiagnostic(string message)
+        {
+            log.Info(message);
+        }
+
+        internal static void LogException(Exception exception, string message)
+        {
+            log.Info(exception, $"[ERROR] {message}");
         }
     }
 }

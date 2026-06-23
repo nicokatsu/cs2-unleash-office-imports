@@ -12,8 +12,6 @@
     <Import Project="$([System.Environment]::GetEnvironmentVariable('CSII_TOOLPATH', 'EnvironmentVariableTarget.User'))\Mod.targets"/>
 
     <ItemGroup>
-        <PackageReference Include="Lib.Harmony" Version="2.2.2"/>
-
         <Reference Include="Game">
             <Private>false</Private>
         </Reference>

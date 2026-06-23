@@ -1,3 +1,4 @@
+#if DEBUG
 using Game;
 using Game.Common;
 using Game.Companies;
@@ -49,7 +50,7 @@ namespace FixSoftwareShortage
                 }
             });
 
-            Mod.log.Info("[OfficeExportDiagnostic] enabled; vanilla ResourceExporterSystem remains authoritative for office exports");
+            Mod.LogDiagnostic("[OfficeExportDiagnostic] enabled; vanilla ResourceExporterSystem remains authoritative for office exports");
         }
 
         protected override void OnUpdate()
@@ -65,7 +66,7 @@ namespace FixSoftwareShortage
 
             if (m_UpdateCounter == 1 || exporterCount > 0 || stockAmount > 0)
             {
-                Mod.log.Info($"[OfficeExportDiagnostic] summary updates={m_UpdateCounter} officeExporters={exporterCount} officeExporterAmount={exporterAmount} outsideConnectionOfficeStock={stockAmount}");
+                Mod.LogDiagnostic($"[OfficeExportDiagnostic] summary updates={m_UpdateCounter} officeExporters={exporterCount} officeExporterAmount={exporterAmount} outsideConnectionOfficeStock={stockAmount}");
             }
         }
 
@@ -118,3 +119,4 @@ namespace FixSoftwareShortage
         }
     }
 }
+#endif
