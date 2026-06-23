@@ -30,6 +30,8 @@ Unleash Office Imports gives those stuck office import requests a small temporar
 	<!--Change log for new version. Single line or multi line. Supports minimal markdown subset-->
 	<ChangeLog>Initial release.</ChangeLog>
 	<!--External link, can be set multiple times. supported types are "discord", "github", "youtube", "twitch", "x", "paypal", "patreon", "buymeacoffee", "kofi", "crowdin", "gitlab", "gofundme"-->
+	<ExternalLink Type="discord" Url="https://discord.com/channels/1024242828114673724/1518830367182688277" />
+	<ExternalLink Type="github" Url="https://github.com/nicokatsu/cs2-unleash-office-imports" />
 	<!--Supported values Public, Private, Unlisted-->
 	<AccessLevel Value="Public" />
 </Publish>
