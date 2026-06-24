@@ -66,20 +66,7 @@ namespace FixSoftwareShortage
 
             if (record.HadEntry)
             {
-                if (index >= 0)
-                {
-                    Resources entry = resources[index];
-                    entry.m_Amount = record.OriginalAmount;
-                    resources[index] = entry;
-                }
-                else
-                {
-                    resources.Add(new Resources
-                    {
-                        m_Resource = record.Resource,
-                        m_Amount = record.OriginalAmount
-                    });
-                }
+                EconomyUtils.SetResources(record.Resource, resources, record.OriginalAmount);
             }
             else if (index >= 0)
             {

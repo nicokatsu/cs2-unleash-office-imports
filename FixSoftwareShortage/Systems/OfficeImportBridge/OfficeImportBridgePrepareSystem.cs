@@ -66,7 +66,7 @@ namespace FixSoftwareShortage
                     Entity request = entities[i];
                     ResourceBuyer buyer = EntityManager.GetComponentData<ResourceBuyer>(request);
 
-                    if (!OfficeTradeResources.IsOfficeResource(buyer.m_ResourceNeeded) ||
+                    if (!EconomyUtils.IsOfficeResource(buyer.m_ResourceNeeded) ||
                         (buyer.m_Flags & SetupTargetFlags.Import) == 0)
                     {
                         continue;
@@ -137,20 +137,7 @@ namespace FixSoftwareShortage
             }
 
             const int injectedAmount = 1;
-            if (hadEntry)
-            {
-                Resources entry = resources[index];
-                entry.m_Amount = injectedAmount;
-                resources[index] = entry;
-            }
-            else
-            {
-                resources.Add(new Resources
-                {
-                    m_Resource = resource,
-                    m_Amount = injectedAmount
-                });
-            }
+            EconomyUtils.SetResources(resource, resources, injectedAmount);
 
             OfficeImportBridgeState.Add(request, destination, resource, hadEntry, originalAmount, injectedAmount);
             m_TotalPrepared++;

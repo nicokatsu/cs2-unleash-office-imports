@@ -81,7 +81,7 @@ namespace FixSoftwareShortage
                 for (int i = 0; i < exporters.Length; i++)
                 {
                     ResourceExporter exporter = exporters[i];
-                    if (!OfficeTradeResources.IsOfficeResource(exporter.m_Resource))
+                    if (!EconomyUtils.IsOfficeResource(exporter.m_Resource))
                     {
                         continue;
                     }
@@ -106,9 +106,14 @@ namespace FixSoftwareShortage
                 {
                     Entity entity = entities[i];
                     DynamicBuffer<Resources> resources = EntityManager.GetBuffer<Resources>(entity, true);
-                    for (int j = 0; j < OfficeTradeResources.Resources.Length; j++)
+                    ResourceIterator iterator = ResourceIterator.GetIterator();
+                    while (iterator.Next())
                     {
-                        stockAmount += EconomyUtils.GetResources(OfficeTradeResources.Resources[j], resources);
+                        Resource resource = iterator.resource;
+                        if (EconomyUtils.IsOfficeResource(resource))
+                        {
+                            stockAmount += EconomyUtils.GetResources(resource, resources);
+                        }
                     }
                 }
             }
