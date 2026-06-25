@@ -8,10 +8,15 @@ namespace FixSoftwareShortage
 {
     public partial class OfficeImportBridgeCleanupSystem : GameSystemBase
     {
+        public override int GetUpdateInterval(SystemUpdatePhase phase)
+        {
+            return OfficeImportBridgeTiming.GetResourceBuyerAlignedInterval(phase);
+        }
+
         protected override void OnCreate()
         {
             base.OnCreate();
-            Mod.LogEssential("[OfficeImportBridge] cleanup enabled; mode=vanilla_bridge");
+            Mod.LogEssential($"[OfficeImportBridge] cleanup enabled; mode=vanilla_bridge interval={OfficeImportBridgeTiming.ResourceBuyerUpdateInterval} offset=inherited_from_ResourceBuyerSystem");
         }
 
         protected override void OnUpdate()
